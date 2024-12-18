@@ -1,46 +1,60 @@
-name: Ruby on Rails CI
+name: Deploy to AWS EC2
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - master
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:13
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: clothingapp_test
-        options: >-
-          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.0
-          bundler-cache: true
+      - name: Set up Environment Variables
+        env:
+        #these are github secrets
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Set up Database
         run: |
-          cp config/database.yml.github-actions config/database.yml
-          bin/rails db:create db:schema:load
+        #save the ssh private key and set the permissions
+        echo "$SSH_PRIVATE_KEY" > MY_KEY_TWO.pem
+        chmod 600 MY_KEY_TWO.pem
 
-      - name: Install dependencies
-        run: bundle install
+      - name: Deploy to EC2
+        run: |
+        #define ec2 instance details
+        INSTANCE_ID="i-092f34c9f20ed71ae"
+        PUBLIC_IP="3.91.168.107"
 
-      - name: Run tests
-        run: bin/rails test
+        ssh -o StrictHostKeyChecking=no -i MY_KEY_TWO.pem ubuntu@$PUBLIC_IP << 'EOF'
+        #exit if errors occur
+        set -e
+
+        #update system
+        sudo apt-get update -y
+
+        #navigate to the directory
+        cd /home/ubuntu
+
+        #pull latest changes from GitHub
+        if [ ! -d "CAD_CA1" ]; then
+          git clone https://github.com/janekeyes/CAD-CA1.git
+        fi
+
+        cd CAD_CA
+
+        #pull latest changes
+        git pull origin main
+
+        #install ruby rails dependencies
+        bundle install
+        rake db:migrate
+        #presompile assets if necessary
+        #rake assets:precompile
+
+        echo "Deployment Complete"
+        EOF
+
