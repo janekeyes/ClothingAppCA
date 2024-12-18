@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "Jane Keyes"
+          git config --global user.email "janekeyes123@gmail.com"
+
       - name: Set up Environment Variables
         env:
           #these are github secrets
