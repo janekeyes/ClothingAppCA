@@ -27,10 +27,11 @@ jobs:
       - name: Deploy to EC2
         run: |
           # Define EC2 instance details
-          PUBLIC_IP="3.91.168.107"
+          INSTANCE_ID="i-092f34c9f20ed71ae"
+          PUBLIC_IP=3.91.168.107
 
           # SSH into EC2 and deploy
-          ssh -vvv -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
             set -e
 
             # Update system and install dependencies
@@ -46,9 +47,9 @@ jobs:
             cd /home/ubuntu
 
             #pull latest changes from GitHub
-            if [ ! -d "CAD-CA1" ]; then
-              git clone https://github.com/janekeyes/CAD-CA1.git
-            fi
+            # if [ ! -d "CAD-CA1" ]; then
+            #   git clone https://github.com/janekeyes/CAD-CA1.git
+            # fi
 
             cd CAD-CA1
             git pull origin master
