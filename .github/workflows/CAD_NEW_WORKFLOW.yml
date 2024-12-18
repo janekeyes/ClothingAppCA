@@ -13,42 +13,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "Jane Keyes"
-          git config --global user.email "janekeyes123@gmail.com"
-
       - name: Set up Environment Variables
         env:
           #these are github secrets
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
         run: |
-          #save the ssh private key and set the permissions
+          # Save the SSH private key and set the permissions
           echo "$SSH_PRIVATE_KEY" > MY_KEY.pem
           chmod 600 MY_KEY.pem
-          ls -l MY_KEY.pem
 
 
       - name: Deploy to EC2
         run: |
-          #define ec2 instance details
-          INSTANCE_ID="i-092f34c9f20ed71ae"
+          # Define EC2 instance details
           PUBLIC_IP="3.91.168.107"
 
+          # SSH into EC2 and deploy
           ssh -vvv -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
-            #exit if errors occur
             set -e
 
-            #update system
-            echo "Updating system..."
+            # Update system and install dependencies
             sudo apt-get update -y
-            sudo apt-get upgrade -y
-
-            echo "Installing Ruby and dependencies..."
             sudo apt-get install -y ruby-full build-essential zlib1g-dev libyaml-dev libssl-dev libreadline-dev libncurses5-dev libffi-dev libsqlite3-dev
 
-
+            # Install Node.js and Yarn
             curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
             sudo apt-get install -y nodejs
             npm install -g yarn
@@ -62,21 +51,15 @@ jobs:
             fi
 
             cd CAD_CA1
-
-            #pull latest changes
-            echo "Pulling latest changes..."
             git pull origin main
 
-            #install ruby rails dependencies
-            echo "Installing Ruby dependencies..."
+            # Install Ruby dependencies
             bundle install
 
-            echo "Running database migrations..."
+            # Run database migrations
             rake db:migrate
-            #presompile assets if necessary
-            #rake assets:precompile
 
-          echo "Deployment Complete"
+            echo "Deployment Complete"
           EOF
 
         #change has been made
