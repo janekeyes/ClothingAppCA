@@ -31,37 +31,39 @@ jobs:
           PUBLIC_IP=3.91.168.107
 
           # SSH into EC2 and deploy
-          ssh -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
-            set -e
+          ssh -vvv -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
+          set -e
 
-            # Update system and install dependencies
-            # sudo apt-get update -y
-            # sudo apt-get install -y ruby-full build-essential zlib1g-dev libyaml-dev libssl-dev libreadline-dev libncurses5-dev libffi-dev libsqlite3-dev
+          # Update system and install dependencies
+          sudo apt-get update -y
+          sudo apt-get install -y ruby-full build-essential zlib1g-dev libyaml-dev libssl-dev libreadline-dev libncurses5-dev libffi-dev libsqlite3-dev
 
-            # Install Node.js and Yarn
-            # curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-            # sudo apt-get install -y nodejs
-            # npm install -g yarn
+          # Install Node.js and Yarn
+          curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          sudo npm install -g yarn
 
-            #navigate to the directory
-            cd /home/ubuntu/CAD_CA1
+          # Navigate to the home directory
+          cd /home/ubuntu
 
-            #pull latest changes from GitHub
-            # if [ ! -d "CAD-CA1" ]; then
-            #   git clone https://github.com/janekeyes/CAD-CA1.git
-            # fi
+          # Clone the repository if it doesn't exist
+          if [ ! -d "CAD_CA1" ]; then
+            git clone https://github.com/janekeyes/CAD-CA1.git
+          fi
 
-            # cd CAD-CA1
-             git pull origin master
+          cd CAD_CA1
+          git pull origin master
 
-            # Install Ruby dependencies
-            bundle install
+          # Install Ruby dependencies
+          bundle install
 
-            # Run database migrations
-            rails db:migrate
+          # Run database migrations
+          rake db:migrate
 
-            echo "Deployment Complete"
+          echo "Deployment Complete"
+
+
           EOF
 
         #change has been made again
-        
+
