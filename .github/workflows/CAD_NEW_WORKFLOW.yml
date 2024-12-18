@@ -28,11 +28,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > MY_KEY.pem
           chmod 600 MY_KEY.pem
           ls -l MY_KEY.pem
-
-      - name: Test SSH connection
-        run: |
-          ssh -vvv -o StrictHostKeyChecking=no -i ~/.ssh/MY_KEY.pem ubuntu@3.91.168.107 'echo "SSH Connection Successful"'
-
+          
 
       - name: Deploy to EC2
         run: |
