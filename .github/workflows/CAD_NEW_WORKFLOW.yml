@@ -19,11 +19,11 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
         run: |
-        #save the ssh private key and set the permissions
-        echo "$SSH_PRIVATE_KEY" > MY_KEY_TWO.pem
+          #save the ssh private key and set the permissions
+          echo "$SSH_PRIVATE_KEY" > MY_KEY_TWO.pem
 
-        #set read write permissions for owner
-        chmod 600 MY_KEY_TWO.pem
+          #set read write permissions for owner
+          chmod 600 MY_KEY_TWO.pem
 
       - name: Deploy to EC2
         run: |
