@@ -24,6 +24,7 @@ jobs:
 
           #set read write permissions for owner
           chmod 600 MY_KEY.pem
+          ls -l MY_KEY.pem
 
       - name: Deploy to EC2
         run: |
@@ -31,7 +32,7 @@ jobs:
           INSTANCE_ID="i-092f34c9f20ed71ae"
           PUBLIC_IP="3.91.168.107"
 
-          ssh -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
+          ssh -vvv -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
             #exit if errors occur
             set -e
 
