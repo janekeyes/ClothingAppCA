@@ -15,8 +15,8 @@ jobs:
 
       - name: Set up Environment Variables
         env:
-        #these are github secrets
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          #these are github secrets
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
         run: |
           #save the ssh private key and set the permissions
@@ -27,38 +27,38 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-        #define ec2 instance details
-        INSTANCE_ID="i-092f34c9f20ed71ae"
-        PUBLIC_IP="3.91.168.107"
+          #define ec2 instance details
+          INSTANCE_ID="i-092f34c9f20ed71ae"
+          PUBLIC_IP="3.91.168.107"
 
-        ssh -o StrictHostKeyChecking=no -i MY_KEY_TWO.pem ubuntu@$PUBLIC_IP << 'EOF'
-        #exit if errors occur
-        set -e
+          ssh -o StrictHostKeyChecking=no -i MY_KEY_TWO.pem ubuntu@$PUBLIC_IP << 'EOF'
+            #exit if errors occur
+            set -e
 
-        #update system
-        sudo apt-get update -y
+            #update system
+            sudo apt-get update -y
 
-        #navigate to the directory
-        cd /home/ubuntu
+            #navigate to the directory
+            cd /home/ubuntu
 
-        #pull latest changes from GitHub
-        if [ ! -d "CAD_CA1" ]; then
-          git clone https://github.com/janekeyes/CAD-CA1.git
-        fi
+            #pull latest changes from GitHub
+            if [ ! -d "CAD_CA1" ]; then
+              git clone https://github.com/janekeyes/CAD-CA1.git
+            fi
 
-        cd CAD_CA
+            cd CAD_CA
 
-        #pull latest changes
-        git pull origin main
+            #pull latest changes
+            git pull origin main
 
-        #install ruby rails dependencies
-        bundle install
-        rake db:migrate
-        #presompile assets if necessary
-        #rake assets:precompile
+            #install ruby rails dependencies
+            bundle install
+            rake db:migrate
+            #presompile assets if necessary
+            #rake assets:precompile
 
-        echo "Deployment Complete"
-        EOF
+          echo "Deployment Complete"
+          EOF
 
         #I AM ADDING THIS COMMENT FOR TESTING PURPOSES
 
