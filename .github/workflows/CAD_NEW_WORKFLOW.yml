@@ -25,10 +25,10 @@ jobs:
 
         run: |
           #save the ssh private key and set the permissions
-          echo "$SSH_PRIVATE_KEY" > MY_KEY.pem
-
-          #set read write permissions for owner
-          chmod 600 MY_KEY.pem
+          echo "$SSH_PRIVATE_KEY" > /tmp/private_key.pem
+          chmod 600 /tmp/private_key.pem
+          eval "$(ssh-agent -s)"
+          ssh-add /tmp/private_key.pem
           ls -l MY_KEY.pem
 
       - name: Deploy to EC2
