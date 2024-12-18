@@ -31,7 +31,7 @@ jobs:
 
       - name: Test SSH connection
         run: |
-          ssh -vvv -o StrictHostKeyChecking=no -i ~/.ssh/private_key.pem ubuntu@3.91.168.107 'echo "SSH Connection Successful"'
+          ssh -vvv -o StrictHostKeyChecking=no -i ~/.ssh/MY_KEY.pem ubuntu@3.91.168.107 'echo "SSH Connection Successful"'
 
 
       - name: Deploy to EC2
