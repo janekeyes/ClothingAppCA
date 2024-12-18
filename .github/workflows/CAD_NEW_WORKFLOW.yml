@@ -28,7 +28,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > MY_KEY.pem
           chmod 600 MY_KEY.pem
           ls -l MY_KEY.pem
-          
+
 
       - name: Deploy to EC2
         run: |
@@ -41,7 +41,17 @@ jobs:
             set -e
 
             #update system
+            echo "Updating system..."
             sudo apt-get update -y
+            sudo apt-get upgrade -y
+
+            echo "Installing Ruby and dependencies..."
+            sudo apt-get install -y ruby-full build-essential zlib1g-dev libyaml-dev libssl-dev libreadline-dev libncurses5-dev libffi-dev libsqlite3-dev
+
+
+            curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            npm install -g yarn
 
             #navigate to the directory
             cd /home/ubuntu
@@ -51,13 +61,17 @@ jobs:
               git clone https://github.com/janekeyes/CAD-CA1.git
             fi
 
-            cd CAD_CA
+            cd CAD_CA1
 
             #pull latest changes
+            echo "Pulling latest changes..."
             git pull origin main
 
             #install ruby rails dependencies
+            echo "Installing Ruby dependencies..."
             bundle install
+
+            echo "Running database migrations..."
             rake db:migrate
             #presompile assets if necessary
             #rake assets:precompile
