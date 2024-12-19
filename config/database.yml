@@ -28,5 +28,12 @@ test:
 # Similarly, if you deploy your application as a Docker container, you must
 # ensure the database is located in a persisted volume.
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  database: clothing_app_production
+  pool: 5
+  username: <your_postgres_user>
+  password: <your_postgres_password>
+
+  # <<: *default
   # database: path/to/persistent/storage/production.sqlite3

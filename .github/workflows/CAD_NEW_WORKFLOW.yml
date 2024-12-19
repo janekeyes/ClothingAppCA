@@ -1,0 +1,53 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Environment Variables
+        env:
+          #these are github secrets
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+        run: |
+          # Save the SSH private key and set the permissions
+          echo "$SSH_PRIVATE_KEY" > MY_KEY.pem
+          chmod 600 MY_KEY.pem
+      - name: Deploy to EC2
+        run: |
+          # Define EC2 instance details
+          PUBLIC_IP="3.91.168.107"
+          # SSH into EC2 and deploy
+          ssh -vvv -o StrictHostKeyChecking=no -i MY_KEY.pem ubuntu@$PUBLIC_IP << 'EOF'
+            set -e
+            # Update system and install dependencies
+            sudo apt-get update -y
+            sudo apt-get install -y ruby-full build-essential zlib1g-dev libyaml-dev libssl-dev libreadline-dev libncurses5-dev libffi-dev libsqlite3-dev
+            # Install Node.js and Yarn
+            curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            npm install -g yarn
+            #navigate to the directory
+            cd /home/ubuntu
+            #pull latest changes from GitHub
+            if [ ! -d "ClothingApp" ]; then
+              git clone https://github.com/janekeyes/ClothinApp.git
+            fi
+            cd ClothingApp
+            git pull origin main
+            # Install Ruby dependencies
+            bundle install
+            # Run database migrations
+            rake db:migrate
+            echo "Deployment Complete"
+          EOF
+        #change has been made
