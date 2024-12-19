@@ -1,0 +1,26 @@
+ <nav class="top-nav">
+      <div class="container-fluid">
+        <div class="nav" id="nav-bar">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <%= link_to root_path do %>
+                <%= image_tag 'logo.png', alt: 'Home', class: 'navbar-logo' %>
+              <% end %>
+            </li>
+            <li>|</li>
+            <li class="nav-item">
+                <%= link_to 'Home', root_path, class: 'nav-link' %>
+            </li>
+            <li>|</li>
+            <li class="nav-item">
+                <%= link_to 'Add New', new_item_path, class: 'nav-link' %>
+            </li>
+            <li>|</li>
+            <li class="nav-item">
+                <%= link_to "Search", search_items_path, class: "nav-link" %>
+            </li>
+            <li>|</li>
+          </ul>
+        </div>
+      </div>
+    </nav>

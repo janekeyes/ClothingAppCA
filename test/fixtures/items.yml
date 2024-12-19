@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
-  size: MyString
-  colour: MyString
+  name: "Hoodie"
+  description: "Womens graphic hoodie"
+  size: "UK 8-10 (S)"
+  colour: "Grey"
   category: one
 
 two:
-  name: MyString
-  description: MyText
-  size: MyString
-  colour: MyString
+  name: "Jeans"
+  description: "Mens baggy jeans"
+  size: "UK 12-14 (M)"
+  colour: "Black"
   category: two

@@ -1,10 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice"><%= notice %></p>
 
 <% content_for :title, "Items" %>
 
 <div class="container mt-5">
   <h1>Items</h1>
-  <%= link_to "New Item", new_item_path, class: "btn btn-success mb-3" %>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -25,12 +24,38 @@
           <td><%= item.colour %></td>
           <td><%= item.category.name if item.category %></td>
           <td>
-            <%= link_to "Show", item, class: "btn btn-info btn-sm" %>
-            <%= link_to "Edit", edit_item_path(item), class: "btn btn-warning btn-sm" %>
-            <%= link_to "Delete", item, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+            <%= link_to "Show", item, class: "tertiary-button" %>
+            <%= link_to "Edit", edit_item_path(item), class: "tertiary-button" %>
+            <%= link_to "Delete", item, method: :delete, data: { confirm: "Are you sure?" }, class: "tertiary-button" %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+<%= search_form_for @q, url: items_path, method: :get, html: { class: "filter-form" } do |f| %>
+  <div class="form-group">
+    <%= f.label :colour_eq, "Filter by:" %>
+    <%= f.select :category_id_eq, options_for_select(Category.all.collect { |category| [category.name, category.id] }, @q.category_id_eq), include_blank: "Category", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.select :size_eq, options_for_select(['UK 4-6 (XS)', 'UK 8-10 (S)', 'UK 12-14 (M)', 'UK 16-18 (L)', 'UK 20-22 (XL)'], @q.size_eq), include_blank: "Size", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.select :colour_eq, options_for_select(['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple', 'Pink', 'Gold', 'Silver', 'Grey', 'Multi', 'Transparent', 'Black', 'White'], @q.colour_eq), include_blank: "Colour", class: "form-control select-small" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Apply", class: "secondary-button" %>
+    <br>
+    <br>
+    <%= link_to 'Clear Filters', items_path, method: :get, class: 'form-link' %>
+  </div>
+<% end %>
+
+
+<script>
+  function clearFilters() {
+    document.getElementById('search-form').reset();
+    window.location.href = "<%= items_path %>"; 
+  }
+</script>

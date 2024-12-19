@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <title><%= content_for(:title) || "Clothing App" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    
+
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-9aRkX1HPLz3bFPdxZkntc7Fy/gg2fwgPo6mV2DhgP9fMvAKNS6V4m+SHh7sG43LP" crossorigin="anonymous">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <%= yield :head %>
 
@@ -14,11 +17,12 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+    <%= flash[:notice] %>
     <%= yield %>
   </body>
 </html>

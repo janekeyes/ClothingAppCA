@@ -1,7 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+import Rails from "@rails/ujs";
 import "bootstrap"
 import "@hotwired/turbo-rails"
 import "controllers"
+
+Rails.start();
 
 $.ajax({
     type: "POST",
@@ -15,4 +18,9 @@ $.ajax({
     error: function(xhr, status, error) {
     }
   });
+
+
+
+
+
   

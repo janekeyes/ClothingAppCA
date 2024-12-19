@@ -40,10 +40,10 @@ class ItemsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  test "should destroy Item" do
+  test "should delete Item" do
     visit item_url(@item)
-    click_on "Destroy this item", match: :first
+    click_on "Delete this item", match: :first
 
-    assert_text "Item was successfully destroyed"
+    assert_text "Item was successfully deleted"
   end
 end

@@ -12,34 +12,46 @@
   <% end %>
 
   <div class="container mt-5">
-  <%= form_with(model: item, local: true) do |form| %>
-    <div class="mb-3">
-      <%= form.label :category_id, "Category", class: "form-label" %>
-      <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, class: "form-control" %>
+    <div class="form-container">
+      <div class="form-content">
+        <div class="form-header">
+         <h2 class="text-center mb-4">Item Details</h2>
+        </div>
+        <div class="form-body">
+          <%= form_with(model: item, local: true) do |form| %>
+          <div class="mb-3">
+            <%= form.label :category_id, "Category", class: "form-label" %>
+            <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, class: "form-control" %>
+          </div>
+
+          <div class="mb-3" id="input-form_item">
+            <%= form.label :name, class: "form-label" %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+          
+          <div class="mb-3">
+            <%= form.label :size, class: "form-label" %>
+            <%= form.select :size, options_for_select(['UK 4-6 (XS)', 'UK 8-10 (S)', 'UK 12-14 (M)', 'UK 16-18 (L)', 'UK 20-22 (XL)']), { include_blank: "Select Size" }, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :colour, class: "form-label" %>
+            <%= form.select :color, options_for_select(['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple', 'Pink', 'Gold', 'Silver', 'Grey', 'Multi', 'Transparent', 'Black', 'White']), { include_blank: "Select Color" }, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :description, class: "form-label" %>
+            <%= form.text_area :description, class: "form-control" %>
+          </div>
+
+
+          <div class="d-flex justify-content-center">
+            <%= form.submit "Save Item", class: "secondary-button" %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="mb-3">
-      <%= form.label :name, class: "form-label" %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
-    
-    <div class="mb-3">
-      <%= form.label :size, class: "form-label" %>
-      <%= form.select :size, options_for_select(['UK 4-6 (XS)', 'UK 8-10 (S)', 'UK 12-14 (M)', 'UK 16-18 (L)', 'UK 20-22 (XL)']), { include_blank: "Select Size" }, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :colour, class: "form-label" %>
-      <%= form.select :color, options_for_select(['Red', 'Orange', 'Yellow', 'Green',  'Blue', 'Purple', 'Pink', 'Gold', 'Silver', 'Grey', 'Multi', 'Tranparent', 'Black', 'White']), { include_blank: "Select Color" }, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :description, class: "form-label" %>
-      <%= form.text_area :description, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-      <%= form.label :image, class: "form-label" %>
-      <%= form.file_field :image, class: "form-control" %>
-    </div>
-    <%= form.submit class: "btn btn-primary" %>
-  <% end %>
+  </div>
 </div>
 
 <% end %>

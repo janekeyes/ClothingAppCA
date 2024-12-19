@@ -32,10 +32,10 @@ class CategoriesTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  test "should destroy Category" do
+  test "should delete Category" do
     visit category_url(@category)
-    click_on "Destroy this category", match: :first
+    click_on "Delete this category", match: :first
 
-    assert_text "Category was successfully destroyed"
+    assert_text "Category was successfully deleted"
   end
 end

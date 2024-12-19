@@ -1,4 +1,3 @@
-@import "bootstrap";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -14,5 +13,310 @@
  *= require_tree .
  *= require_self
  */
- 
+@import "bootstrap";
 
+/**BODY STYLING**/
+body {
+    padding-top: 120px;
+    padding-bottom: 120px;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: #FDF7F4;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%
+}
+
+/**NAVIGATION STYLING**/
+.navbar-logo {
+    height: 90px;
+    width: auto;
+
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: pink;
+    z-index: 99;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
+}
+
+.container-fluid {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    min-width: 100%;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.nav-item {
+    margin: 0 15px
+}
+
+.nav-link {
+    color: #1A1A1D;
+    text-decoration: none;
+    transition: color 0.5s ease;
+}
+
+.nav-link:hover {
+    color: grey;
+}
+
+/**FORM STYLING**/
+.container {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form-container {
+    color: white;
+    padding: 20px;
+    width: 550px;
+    height: 550px;
+    margin: 0;
+    border-radius: 50%;
+    background-color: pink;
+    box-shadow: 0px 0px 15px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form-content {
+    z-index: 5;
+    border-radius: 50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(169, 169, 169, 1) 0%, rgba(169, 169, 169, 0) 70%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-header {
+    color: #1A1A1D;
+}
+
+.form-body {
+    z-index: 1;
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    flex-direction: column;   
+    width: 400px;
+    height: auto;    
+    gap: 20px;
+    color: #1A1A1D;
+    margin: auto; 
+}
+
+.form-body .mb-3 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    color: #1A1A1D;
+}
+
+.form-control {
+    height: 30px;
+    width: 200px;
+    background-color: white;
+    border-radius: 4px;
+    border: none;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+
+.form-control:focus {
+    border-color: #1A1A1D;
+    box-shadow: 0 0 8px #1a1a1d57(0, 123, 255, .25);
+}
+
+
+.filter-form {
+    width:200px;
+    height: auto;
+}
+
+.select {
+    height: 30px;
+    width: 200px;
+}
+
+
+/* Button styles */
+.primary-button {
+    background: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    border: none;
+    width: 200px;
+    height: 20px;
+    padding: 10px 15px;
+    text-align: center;
+    color: #1A1A1D;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+.primary-button:hover, 
+.secondary-button:hover, 
+.tertiary-button:hover {
+    background: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.primary-button:active {
+    background: linear-gradient(to bottom, #e6e6e6, #d9d9d9);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.secondary-button,
+.secondary-button:link,
+.secondary-button:visited {
+    background: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    border: none;
+    width: 100px;
+    padding: 10px 15px;
+    text-align: center;
+    color: #1A1A1D;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+    text-decoration: none; 
+    display: inline-block; 
+}
+
+.secondary-button[type="submit"] {
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.button-container{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.tertiary-button {
+    background: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    border: none;
+    width: 75px;
+    height: 15px;
+    padding: 10px 15px;
+    text-align: center;
+    color: #1A1A1D;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none; 
+    display: inline-block; 
+}
+
+/**INDEX TABLE STYLING**/
+.notice {
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: pink;
+    font-weight: bold;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 192, 203, 0.451);
+    
+  }
+  
+  /**FORM STYLING**/
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .form-link {
+    text-decoration: underline; 
+    color: #1A1A1D; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: color 0.3s ease; 
+    }
+
+    .form-link:hover {
+        color: #1a1a1d9a; 
+    }

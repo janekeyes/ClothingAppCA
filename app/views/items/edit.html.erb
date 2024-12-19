@@ -1,12 +1,14 @@
 <% content_for :title, "Editing item" %>
 
-<h1>Editing item</h1>
-
+<div class="title-container">
+<h1>Edit Item</h1>
+</div>
+<div>
+  <%= link_to "Show this item", @item, class: "form-link" %> |
+  <%= link_to "Back to items", items_path, class: "form-link" %>
+</div>
 <%= render "form", item: @item %>
 
 <br>
 
-<div>
-  <%= link_to "Show this item", @item %> |
-  <%= link_to "Back to items", items_path %>
-</div>
+

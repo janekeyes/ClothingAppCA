@@ -1,12 +1,26 @@
 source "https://rubygems.org"
 
+# bootstrap used for styling  the application views as per project brief
 gem "bootstrap", "~> 5.3.0"
-gem "sassc-rails"
+
+# for sass styling - unused, used css instead
+# gem "sassc-rails"
+
 gem "rspec-rails", "~> 6.0.0"
-gem "activestorage"
 
+# ransack library used for searching and filtering throughout the application
+gem 'ransack'
 
+# to interact with c libraries
+gem 'fiddle', '~> 3.0'
 
+gem 'rails-ujs'
+
+# gem "activestorage" - no longer used as not using images
+
+group :test do
+  gem 'minitest-rails'
+end
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2", ">= 7.2.2.1"
