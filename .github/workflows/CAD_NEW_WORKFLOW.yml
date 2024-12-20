@@ -15,7 +15,6 @@ jobs:
 
       - name: Set up Environment Variables
         env:
-          #these are github secrets
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
         run: |
@@ -39,10 +38,10 @@ jobs:
             #navigate to the directory
             cd /home/ubuntu
             #pull latest changes from GitHub
-            if [ ! -d "ClothingApp" ]; then
-              git clone https://github.com/janekeyes/ClothinApp.git
+            if [ ! -d "ClothingAppCA" ]; then
+              git clone https://github.com/janekeyes/ClothingAppCA.git
             fi
-            cd ClothingApp
+            cd ClothingAppCA
             git pull origin main
             # Install Ruby dependencies
             bundle install
@@ -50,4 +49,3 @@ jobs:
             rake db:migrate
             echo "Deployment Complete"
           EOF
-        #change has been made
