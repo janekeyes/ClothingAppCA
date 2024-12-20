@@ -6,7 +6,7 @@ gem "bootstrap", "~> 5.3.0"
 # for sass styling 
 gem "sassc-rails"
 
-gem "rspec-rails", "~> 6.0.0"
+gem "rspec-rails", "~> 7.1.0"
 
 # ransack library used for searching and filtering throughout the application
 gem 'ransack'
