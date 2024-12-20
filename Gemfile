@@ -3,8 +3,8 @@ source "https://rubygems.org"
 # bootstrap used for styling  the application views as per project brief
 gem "bootstrap", "~> 5.3.0"
 
-# for sass styling - unused, used css instead
-# gem "sassc-rails"
+# for sass styling 
+gem "sassc-rails"
 
 gem "rspec-rails", "~> 6.0.0"
 
@@ -12,7 +12,8 @@ gem "rspec-rails", "~> 6.0.0"
 gem 'ransack'
 
 # to interact with c libraries
-gem 'fiddle', '~> 3.0'
+gem "fiddle", "~> 1.0"
+
 
 gem 'rails-ujs'
 
